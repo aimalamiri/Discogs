@@ -8,5 +8,15 @@ RSpec.describe Artist, type: :model do
     it 'is valid with valid attributes' do
       expect(subject).to be_valid
     end
+
+    it 'is invalid without a name' do
+      subject.name = nil
+      expect(subject).to_not be_valid
+    end
+
+    it 'is invalid when the image is longer the 255 characters' do
+      subject.image_url = 'https://something.com/image.jpg' * 10
+      expect(subject).to_not be_valid
+    end
   end
 end
